@@ -7,7 +7,7 @@ ETL toolchain in Python.
 
 By using `sqns_access` module, processing of a sequential access file can be effecient, flexible, and easy to access and validate each record in the file.
 
-`sqns_access.gen_rec(file, help_func)`: to read a `file` and process it with `help_func`.
+`sqns_access.gen_rec(fo, help_func)`: to read a `file` and process it with `help_func`.
 
 `sqns_access.helpers.header(data, help_func)`: to process `data` with `help_func`, then return a `header`.
 

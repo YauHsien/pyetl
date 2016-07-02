@@ -1,9 +1,8 @@
 import helpers
 
-def gen_rec(file, help_func):
-    fo = open(file, 'r')
+# fo: file object open with read mode
+def gen_rec(fo, help_func):
     hdr = helpers.header(data= fo.__next__(), help_func= help_func)
-    yield hdr
     for l in fo:
         ln = helpers.line(data= l, header= hdr, help_func= help_func)
         yield ln
