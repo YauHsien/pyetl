@@ -1,4 +1,4 @@
-.PHONY: init test
+.PHONY: init test example.oops example.hello
 
 PIP = pip3
 PYTHON_USER_BASE = ./.local
@@ -16,3 +16,10 @@ init: .load-env
 
 test:
 	$(PyTest) tests
+
+example.oops:
+	./etl world1 hello
+	./etl world hello1
+	./etl hello world 1
+example.hello:
+	./etl hello world

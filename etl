@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+python scripts/main.py "$1" "$2" "$3" "$4"

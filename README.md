@@ -13,6 +13,54 @@ ETL toolchain in Python.
 - 整理 `make` 指令。
 - 定位 Python 版本。
 
+## 指令系統
+每一行指令由 `./etl` 起，依序有 `action`、 `target`、 `key`、 `value`（選用） 等。例如
+
+```
+$ ./etl add config name "Yau-Hsien Huang"
+```
+- `action`: `add`
+- `target`: `config`
+- `key`: `name`
+- `value`: `"Yau-Hsien Huang"`
+
+##### 指令模組
+由上述例子，想擴充指令模組，使指令 `./etl add config name "..."` 能解析，須運用以下步驟：
+1. 添加 `target`: `config` 模組：
+   ```
+   $ mkdir scripts/commands/config
+   $ touch scripts/commands/config/__init__.py
+   ```
+1. 編輯 `action`，在此為 `commands.config.add(..)` 函式： 
+   ```
+   # 在 scripts/commands/config/__init__.py 檔案內容...
+   
+   # 如果沒有 `key`、 `value`
+   def add():
+       pass
+   
+   # 如果有 `key`、 `value`
+   def add(key, value):
+       pass
+       
+   # 如果只有 `key`
+   def add(key):
+       pass
+   ```
+   須依照指令的 `key`、 `value` 情況，所寫的 `commands.config.add(..)` 函式有處理 1 ~ 3 個參數。
+1. 確認指令有效：若擴充了上述指令 `./etl add config name "..."` ，則須確認指令的操作結果符合下列行為：
+   ```
+   $ ./etl add config
+   （印出指令說明書。）
+   $ ./etl add config name
+   （印出指令說明書。）
+   $ ./etl add config name "Yau-Hsien Huang"
+   （依 `commands.config.add(key,value)` 的定義，完成指令的執行，並印出結果。）
+   ```
+
+##### 範例指令
+見 [Makefile](https://github.com/yauhsien/pyetl/blob/remastered/Makefile) 的二項： `example.oops` 與 `example.hello` 。
+
 ### Toolchain
 
 #### Sequential Access on File
